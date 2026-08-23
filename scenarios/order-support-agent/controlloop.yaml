@@ -1,0 +1,28 @@
+schema_version: "1.0.0"
+owner: support-eng
+trust_boundaries:
+  - name: order-support-boundary
+    agents:
+      - widgetworks-order-support-agent
+approvals:
+  - capability: order-support-tools-mcp
+    approver: support-eng-lead
+    expires_at: "2027-08-23T00:00:00Z"
+prohibited_capabilities:
+  - agent: widgetworks-order-support-agent
+    edge_type: writes
+    target: customer-payment-methods
+data_classification:
+  - resource: orders-table
+    sensitivity: confidential
+ceilings:
+  - agent: widgetworks-order-support-agent
+    prohibited_resources:
+      - customer-payment-methods
+    prohibited_delegation_targets:
+      - unapproved-agent
+  - prohibited_data_classes: [restricted]
+    prohibited_external_destinations: [pastebin.com]
+logged_tools:
+  - tool: issue-refund
+    audit_path: logs/refund-audit.log

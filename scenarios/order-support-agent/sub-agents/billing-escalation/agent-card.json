@@ -1,0 +1,15 @@
+{
+  "protocolVersion": "0.2",
+  "name": "billing-escalation-agent",
+  "description": "Reviews disputed charges and chargebacks escalated from the order support agent.",
+  "skills": [
+    {
+      "id": "review-dispute",
+      "name": "Review a billing dispute"
+    },
+    {
+      "id": "issue-chargeback-response",
+      "name": "Respond to a chargeback"
+    }
+  ]
+}

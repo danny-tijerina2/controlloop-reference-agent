@@ -1,0 +1,25 @@
+{
+  "protocolVersion": "0.2",
+  "name": "widgetworks-order-support-agent",
+  "description": "Looks up orders, issues refunds, and replies to customer support tickets for the Widgetworks online store. Escalates disputed charges to a dedicated billing agent.",
+  "skills": [
+    {
+      "id": "lookup-order",
+      "name": "Look up an order",
+      "description": "Retrieve order status and history for a customer."
+    },
+    {
+      "id": "issue-refund",
+      "name": "Issue a refund",
+      "description": "Issue a refund against a completed order."
+    },
+    {
+      "id": "reply-to-customer",
+      "name": "Reply to customer",
+      "description": "Send a support reply email to the customer who opened the ticket."
+    }
+  ],
+  "x-controlloop-delegates-to": [
+    "sub-agents/billing-escalation/agent-card.json"
+  ]
+}

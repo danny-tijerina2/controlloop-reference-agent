@@ -1,0 +1,18 @@
+openapi: 3.0.0
+info:
+  title: Widgetworks Orders API
+  version: "1.0"
+  description: Internal service the order support agent calls to read and mutate order state.
+paths:
+  /orders/{orderId}:
+    get:
+      operationId: getOrder
+      summary: Retrieve an order by ID
+  /orders/{orderId}/refund:
+    post:
+      operationId: issueRefund
+      summary: Issue a refund for an order
+  /customers/{customerId}/orders:
+    get:
+      operationId: listCustomerOrders
+      summary: List orders for a customer

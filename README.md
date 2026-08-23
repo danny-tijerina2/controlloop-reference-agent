@@ -51,12 +51,26 @@ requests — see `.github/ISSUE_TEMPLATE/config.yml`. For questions, bugs, or
 support related to the ControlLoop CLI itself, use
 [`danny-tijerina2/controlloop`](https://github.com/danny-tijerina2/controlloop/issues).
 
+## Scenarios
+
+| Directory | Demonstrates | Issue |
+| --- | --- | --- |
+| [`scenarios/order-support-agent/`](scenarios/order-support-agent/) | The base, "currently approved" reference agent every other scenario builds on | [controlloop#99](https://github.com/danny-tijerina2/controlloop/issues/99) (E10.3) |
+
+Each scenario is its own self-contained scan root — point `controlloop`
+at a scenario's directory, not the repository root, to scan it.
+
 ## Status
 
 Namespace and repository ownership reserved per the decision recorded in
 [controlloop#134](https://github.com/danny-tijerina2/controlloop/issues/134)
-(E14.7). Scenario content has not been written yet — that is
-[controlloop#99](https://github.com/danny-tijerina2/controlloop/issues/99)
+(E14.7). The base scenario above is written
+([controlloop#99](https://github.com/danny-tijerina2/controlloop/issues/99)).
+The four scenario variations built on top of it — capability expansion,
+a ceiling breach, an exfiltration triangle, a capability reduction — are
+[controlloop#100](https://github.com/danny-tijerina2/controlloop/issues/100)
 through
+[controlloop#103](https://github.com/danny-tijerina2/controlloop/issues/103),
+and end-to-end CI proof against a pinned `controlloop` release is
 [controlloop#104](https://github.com/danny-tijerina2/controlloop/issues/104)
-(epic E10 — Reference agent and scenarios), still open.
+(epic E10 — Reference agent and scenarios) — all still open.
