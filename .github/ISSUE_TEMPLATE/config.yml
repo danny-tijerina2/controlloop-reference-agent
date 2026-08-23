@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: ControlLoop CLI support and bug reports
+    url: https://github.com/danny-tijerina2/controlloop/issues
+    about: >-
+      This repository is a deliberately vulnerable demonstration fixture and
+      does not accept support requests. File CLI bugs, questions, or feature
+      requests against the main repository instead.
