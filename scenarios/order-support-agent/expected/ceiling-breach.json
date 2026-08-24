@@ -1,0 +1,56 @@
+{
+  "_comment": [
+    "Committed expectations for ControlLoop issue #101 (E10.5), asserted by",
+    "the end-to-end proof in controlloop#104. Every value here was produced by",
+    "a real `controlloop scan --format json` run against this scenario, never",
+    "hand-written."
+  ],
+  "blocking_run": {
+    "manifest": "controlloop.yaml",
+    "verdict": "deployment_blocked",
+    "gate_exit_code": 1,
+    "ceiling_finding": {
+      "rule_id": "policy.capability-ceiling",
+      "id": "clp:finding:sha256:0040317197a25b4b2e73c3a5555591e0c2f1f7cabb28ac22aae615684b37cd0a",
+      "severity": "critical",
+      "confidence": "high",
+      "message": "agent 'widgetworks-order-support-agent' reaches 'customer-payment-methods', which is a prohibited resource or external destination under its capability ceiling",
+      "capability_path": {
+        "schema_version": "1.0.0",
+        "agent_id": "clp:agent:sha256:2321fe51daefbeccc66dac2ae3e63aa0237216db27510216a9f61c3faf760cf9",
+        "target_id": "clp:tool:sha256:ccc68b7249f13d0adc17697189b7c926765999a2457d02a10a8f0994c0df29da",
+        "target_type": "tool",
+        "hops": [
+          {
+            "edge_id": "clp:edge:sha256:0234aa415234ef1333ba04c7660794815124867248a7f245523c9dee82c771a1",
+            "edge_type": "invokes",
+            "source_id": "clp:agent:sha256:2321fe51daefbeccc66dac2ae3e63aa0237216db27510216a9f61c3faf760cf9",
+            "target_id": "clp:tool:sha256:ccc68b7249f13d0adc17697189b7c926765999a2457d02a10a8f0994c0df29da",
+            "evidence": [
+              {
+                "adapter": "a2a",
+                "path": "agent-card.json",
+                "line_start": null,
+                "line_end": null,
+                "parser": null,
+                "schema_id": null,
+                "document_digest": null
+              }
+            ]
+          }
+        ],
+        "confidence": "high"
+      }
+    },
+    "suppressed_pattern_rules": [
+      "policy.undeclared-tools"
+    ],
+    "suppression_count": 4
+  },
+  "amended_run": {
+    "manifest": "controlloop.amended.yaml",
+    "verdict": "passed",
+    "gate_exit_code": 0,
+    "note": "identical agent-card.json; only the ceiling clause differs"
+  }
+}
