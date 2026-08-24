@@ -1,4 +1,4 @@
-schema_version: "1.0.0"
+schema_version: "1.1.0"
 owner: support-eng
 trust_boundaries:
   - name: order-support-boundary
@@ -19,13 +19,41 @@ ceilings:
   - agent: widgetworks-order-support-agent
     # AMENDED: customer-payment-methods removed from prohibited_resources,
     # so the capability this pull request adds is now within the ceiling.
+    # Identical to controlloop.yaml in every other respect.
     prohibited_delegation_targets:
       - unapproved-agent
   - prohibited_data_classes: [restricted]
     prohibited_external_destinations: [pastebin.com]
+# Every tool declared privileged in tool_capabilities below needs an
+# audit path, or policy.missing-action-logging blocks the gate.
 logged_tools:
-  - tool: issue-refund
+  - tool: Issue a refund
     audit_path: logs/refund-audit.log
+  - tool: Look up an order
+    audit_path: logs/order-lookup-audit.log
+  - tool: Reply to customer
+    audit_path: logs/customer-reply-audit.log
+
+# What these tools actually do. Discovery can read an agent card and an
+# OpenAPI spec, but nothing in a repository states that issuing a refund
+# moves money -- so without this block ControlLoop cannot classify any of
+# this agent's capabilities, and every scan reports "no material
+# capability is reachable". See controlloop#249.
+#
+# Names match what discovery found: an a2a skill's node name is its
+# card `name`, not its `id`.
+tool_capabilities:
+  - tool: Issue a refund
+    financial_action: true
+    read_only: false
+    sensitivity: confidential
+  - tool: Look up an order
+    read_only: true
+    sensitivity: confidential
+  - tool: Reply to customer
+    external_communication: true
+    read_only: false
+
 # Every pattern-rule finding this scenario produces is explicitly
 # suppressed, so the only thing left that can block the gate is the
 # declared capability ceiling itself. That is the whole point of the

@@ -34,6 +34,9 @@ ceiling is the only thing left that can block.
 
 ```
 $ controlloop gate scenarios/order-support-agent
+! WORST REACHABLE  financial-action: widgetworks-order-support-agent can invokes
+  Issue a refund
+
 ✕ DEPLOYMENT BLOCKED
 
 ✕ CRITICAL  policy.capability-ceiling: agent 'widgetworks-order-support-agent'
@@ -52,6 +55,9 @@ nothing else changed. Run the gate against the same `agent-card.json`
 with that manifest in place and it passes:
 
 ```
+! WORST REACHABLE  financial-action: widgetworks-order-support-agent can invokes
+  Issue a refund
+
 ✓ PASSED
 ```
 
@@ -70,3 +76,12 @@ runs -- only the declared ceiling did. That is the mechanism working.
 `scenarios/order-support-agent/expected/ceiling-breach.json` holds the
 committed expectations, produced by a real run and asserted by the
 end-to-end proof in ControlLoop issue #104.
+
+## Note on the blast-radius line
+
+The `WORST REACHABLE` line above comes from the base scenario's
+`tool_capabilities` declaration, added by controlloop#249 -- it is the
+agent's worst *existing* authority, not something this pull request
+introduces. It appears in both runs precisely because this scenario does
+not change it. Before #249 no repository scan could produce that line at
+all.
