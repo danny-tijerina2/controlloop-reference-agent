@@ -17,8 +17,9 @@ data_classification:
     sensitivity: confidential
 ceilings:
   - agent: widgetworks-order-support-agent
-    prohibited_resources:
-      - customer-payment-methods
+    # AMENDED: customer-payment-methods removed from prohibited_resources,
+    # so the capability this pull request adds is now within the ceiling.
+    # Identical to controlloop.yaml in every other respect.
     prohibited_delegation_targets:
       - unapproved-agent
   - prohibited_data_classes: [restricted]
