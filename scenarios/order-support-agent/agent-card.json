@@ -17,11 +17,6 @@
       "id": "reply-to-customer",
       "name": "Reply to customer",
       "description": "Send a support reply email to the customer who opened the ticket."
-    },
-    {
-      "id": "update-payment-method",
-      "name": "customer-payment-methods",
-      "description": "Update the stored card on a customer's account when support confirms the old one failed."
     }
   ],
   "x-controlloop-delegates-to": [

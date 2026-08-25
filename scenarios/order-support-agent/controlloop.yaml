@@ -52,25 +52,3 @@ tool_capabilities:
   - tool: Reply to customer
     external_communication: true
     read_only: false
-
-# Every pattern-rule finding this scenario produces is explicitly
-# suppressed, so the only thing left that can block the gate is the
-# declared capability ceiling itself. That is the whole point of the
-# scenario: if the ceiling is decoration, this pull request passes.
-suppressions:
-  - rule_id: policy.undeclared-tools
-    target: clp:finding:sha256:829b7e68b1b88cb7c03bc1ffed58b47ad706094d4314a8769b09073cc5ca76b1
-    reason: "scenario: pattern rules deliberately disabled to isolate the ceiling"
-    expires_at: "2027-08-24"
-  - rule_id: policy.undeclared-tools
-    target: clp:finding:sha256:b410ad2e23bd479a8bdc81bfe228c6e527e7fe70590c1b52745a12236d3ef290
-    reason: "scenario: pattern rules deliberately disabled to isolate the ceiling"
-    expires_at: "2027-08-24"
-  - rule_id: policy.undeclared-tools
-    target: clp:finding:sha256:c5914bf37db3413b6a9dc0244b46dd0041cd73b6577989cb2d768a99930bdbf9
-    reason: "scenario: pattern rules deliberately disabled to isolate the ceiling"
-    expires_at: "2027-08-24"
-  - rule_id: policy.undeclared-tools
-    target: clp:finding:sha256:c83965b1c1435868c9685db0a3fd3c4e7404237e50bf87f4c3de9e4d76ed59ee
-    reason: "scenario: pattern rules deliberately disabled to isolate the ceiling"
-    expires_at: "2027-08-24"
