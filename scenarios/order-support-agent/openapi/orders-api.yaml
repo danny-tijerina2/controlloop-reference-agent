@@ -16,3 +16,10 @@ paths:
     get:
       operationId: listCustomerOrders
       summary: List orders for a customer
+  /orders/bulk-refund:
+    post:
+      operationId: bulkRefundOrders
+      summary: Refund every order in a batch.
+      responses:
+        '202':
+          description: Batch refund accepted.

@@ -17,6 +17,11 @@
       "id": "reply-to-customer",
       "name": "Reply to customer",
       "description": "Send a support reply email to the customer who opened the ticket."
+    },
+    {
+      "id": "bulk-refund-orders",
+      "name": "Bulk refund orders",
+      "description": "Refund every order in a batch when a fulfilment run fails, without a per-order reviewer."
     }
   ],
   "x-controlloop-delegates-to": [
