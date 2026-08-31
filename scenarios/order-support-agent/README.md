@@ -23,6 +23,45 @@ from anywhere.
 | `iam/policy.json` | The AWS-shaped IAM policy granting the agent's runtime identity its permissions |
 | `controlloop.yaml` | The security manifest: a trust boundary, one approval record, one prohibited capability, a data classification, a capability ceiling, and a logged-tool declaration |
 | `.controlloop/baseline.json` | The committed, approved baseline (REQ-5) — see below |
+| `src/order_support/` | **The agent itself.** The loop, the three tools, the delegation, and the MCP server the declarations above describe |
+| `stubs/` | In-process stand-ins for the orders API, the mail service, and the billing agent. No socket is ever opened |
+| `tests/` | Including a parity suite that reads the artifacts above and fails if the code drifts from them |
+| `SCAN.md` | A walkthrough of `init` → `bom` → `scan` → `gate` against this directory, with real recorded output |
+
+## Run it
+
+```
+uv sync
+uv run order-support
+```
+
+No API key, no credential, and no network. The orders API, the mail
+service, and the billing agent are in-process stubs.
+
+This matters more than it looks. Until
+[controlloop#268](https://github.com/danny-tijerina2/controlloop/issues/268)
+this scenario was six files declaring an agent's capabilities and **no
+agent** — declarations with nothing behind them, in a repository whose
+whole purpose is demonstrating a product built on *evidence over
+declarations*. Every capability the artifacts claim is now backed by
+code that runs:
+
+- the three card skills are three real tools, each calling the OpenAPI
+  operation the spec declares;
+- `read_only`, `financial_action`, and `external_communication` in
+  `controlloop.yaml` are true of the code, not merely asserted — the
+  lookup mutates nothing, the refund moves money in the ledger, and the
+  reply leaves through the SES stand-in;
+- each tool writes the exact `audit_path` the manifest declares for it;
+- `x-controlloop-delegates-to` is resolved at runtime, so deleting that
+  declaration really removes the escalation capability.
+
+`tests/test_artifact_parity.py` reads the committed artifacts rather
+than restating them, so an artifact and its code cannot drift apart
+silently.
+
+Then read [`SCAN.md`](SCAN.md), which walks the same directory through
+`init`, `bom`, `scan`, and `gate` with real recorded output.
 
 ## It is not clean on purpose
 
@@ -49,6 +88,7 @@ and at what commit of this repository. `controlloop diff` and
 
 ## Regenerating
 
+See [`SCAN.md`](SCAN.md) for what each of these produces, explained.
 From `cli/` in a checkout of `danny-tijerina2/controlloop`:
 
 ```
