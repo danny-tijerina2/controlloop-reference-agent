@@ -40,9 +40,13 @@ against an agent that isn't a synthetic unit-test fixture.
 - **In scope:** minimal, individually-labeled scenario agents (one capability
   pattern per scenario), each with a short note on which `controlloop` rule
   it is meant to trigger.
-- **Out of scope:** anything resembling a real, deployable agent; any
-  capability, credential, or integration that could function outside this
-  demonstration; production hardening of any kind.
+- **In scope:** agent code that really runs, so the declarations a
+  scenario makes are backed by something rather than describing software
+  that does not exist. It runs against in-process stubs with no key and
+  no network.
+- **Out of scope:** any capability, credential, or integration that could
+  function outside this demonstration; production hardening of any kind.
+  Runnable is not deployable — these agents are built to be unsafe.
 
 ## Issues and pull requests
 
@@ -55,7 +59,8 @@ support related to the ControlLoop CLI itself, use
 
 | Directory | Demonstrates | Issue |
 | --- | --- | --- |
-| [`scenarios/order-support-agent/`](scenarios/order-support-agent/) | The base, "currently approved" reference agent every other scenario builds on | [controlloop#99](https://github.com/danny-tijerina2/controlloop/issues/99) (E10.3) |
+| [`scenarios/order-support-agent/`](scenarios/order-support-agent/) | The base, "currently approved" reference agent every other scenario builds on. Runnable: `uv run order-support`, then see [`SCAN.md`](scenarios/order-support-agent/SCAN.md) | [controlloop#99](https://github.com/danny-tijerina2/controlloop/issues/99) (E10.3), [controlloop#268](https://github.com/danny-tijerina2/controlloop/issues/268) |
+| [`scenarios/research-crew/`](scenarios/research-crew/) | A CrewAI crew whose publishing agent builds its tool list at runtime, so ControlLoop cannot read it. Zero policy findings, and still not safe | [controlloop#276](https://github.com/danny-tijerina2/controlloop/issues/276) (E15.4) |
 
 Each scenario is its own self-contained scan root — point `controlloop`
 at a scenario's directory, not the repository root, to scan it.

@@ -1,0 +1,36 @@
+# The order-support agent this scenario's artifacts describe.
+#
+# Deliberately dependency-free at runtime: every capability below is
+# implemented against the Python standard library and in-process stubs,
+# so `uv run order-support` works with no API key, no credential, and no
+# network access. That is a property this repository needs, not an
+# accident -- see SCAN.md.
+
+[project]
+name = "order-support-agent"
+version = "0.1.0"
+description = "Deliberately over-privileged demo agent for the ControlLoop reference scenario."
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+order-support = "order_support.agent:main"
+order-support-mcp = "order_support.mcp_server:main"
+
+[dependency-groups]
+# `pyyaml` is a TEST dependency only: the parity tests read the
+# committed `openapi/orders-api.yaml` and `controlloop.yaml` rather
+# than restating their contents. The agent itself has no runtime
+# dependency at all.
+dev = ["pytest>=8.0", "pyyaml>=6.0"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/order_support", "stubs"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "."]
+testpaths = ["tests"]
