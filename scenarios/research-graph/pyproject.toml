@@ -1,0 +1,6 @@
+[project]
+name = "research-graph"
+version = "0.1.0"
+description = "Deliberately over-privileged LangGraph demo application for the ControlLoop reference scenarios."
+requires-python = ">=3.12"
+dependencies = ["langgraph>=0.4.0"]
