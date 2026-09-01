@@ -1,0 +1,8 @@
+# Audit logs are written at runtime to the paths controlloop.yaml
+# declares under `logged_tools`. The paths are part of the contract; the
+# files they produce are not committed.
+logs/
+__pycache__/
+.venv/
+.pytest_cache/
+*.egg-info/

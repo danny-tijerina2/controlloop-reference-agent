@@ -1,8 +1,11 @@
 {
   "mcpServers": {
     "order-support-tools": {
-      "command": "node",
-      "args": ["./mcp-server/index.js"],
+      "command": "uv",
+      "args": [
+        "run",
+        "order-support-mcp"
+      ],
       "env": {
         "ORDERS_API_BASE_URL": "https://internal-orders-api.widgetworks.example/v1"
       }
