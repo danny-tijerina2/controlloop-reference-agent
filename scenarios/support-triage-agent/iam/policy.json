@@ -1,0 +1,17 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "TicketsTable",
+      "Effect": "Allow",
+      "Action": ["dynamodb:GetItem", "dynamodb:Query", "dynamodb:DeleteItem"],
+      "Resource": "arn:aws:dynamodb:us-east-1:333333333333:table/tickets"
+    },
+    {
+      "Sid": "CustomerRecords",
+      "Effect": "Allow",
+      "Action": ["s3:GetObject", "s3:DeleteObject"],
+      "Resource": "arn:aws:s3:::widgetworks-customer-records/*"
+    }
+  ]
+}
