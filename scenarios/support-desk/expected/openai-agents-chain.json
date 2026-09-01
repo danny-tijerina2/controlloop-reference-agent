@@ -1,0 +1,23 @@
+{
+  "_comment": [
+    "Committed expectations for ControlLoop issue #287 (E17.4), asserted by",
+    "the reference-scenario workflow. Produced by a real `controlloop gate`",
+    "run, never hand-written.",
+    "",
+    "The headline names the unclassified Router tool, not the refund chain,",
+    "and that is correct: UNCLASSIFIED ranks worst in the material taxonomy",
+    "because an unreadable capability could be anything. The multi-hop chain",
+    "is still present in the graph -- Triage reaches issue-refund in three",
+    "hops -- and README.md records it separately."
+  ],
+  "warn_run": {
+    "manifest": "controlloop.yaml",
+    "verdict": "passed_with_warnings",
+    "gate_exit_code": 0,
+    "suppressed_pattern_rules": [],
+    "blast_radius": {
+      "material_class": "unclassified",
+      "target_name": "unresolved-tools:Router"
+    }
+  }
+}

@@ -1,0 +1,53 @@
+schema_version: "1.2.0"
+owner: support-eng
+
+trust_boundaries:
+  - name: support-boundary
+    agents: [Triage, Billing, Escalation, Router]
+
+# Discovery learns which tools exist and who holds them. Nothing in an
+# SDK project states that issuing a refund moves money -- so, exactly as
+# for an A2A skill, a CrewAI tool, or a LangGraph binding, that has to
+# be declared here. Without it the scan reports "no material capability
+# is reachable" over an agent chain that reaches a refund.
+tool_capabilities:
+  - tool: lookup_order
+    read_only: true
+  - tool: issue-refund
+    financial_action: true
+    read_only: false
+    sensitivity: confidential
+  - tool: purge_customer
+    destructive: true
+    read_only: false
+    sensitivity: confidential
+
+logged_tools:
+  - tool: issue-refund
+    audit_path: logs/refund-audit.log
+  - tool: purge_customer
+    audit_path: logs/purge-audit.log
+  - tool: lookup_order
+    audit_path: logs/lookup-audit.log
+  - tool: unresolved-tools:Router
+    audit_path: logs/router-audit.log
+
+allowed_delegation:
+  - agent: Triage
+    targets: [Billing]
+  - agent: Billing
+    targets: [Escalation]
+
+approvals:
+  - capability: lookup_order
+    approver: support-eng-lead
+    expires_at: "2027-09-01T00:00:00Z"
+  - capability: issue-refund
+    approver: support-eng-lead
+    expires_at: "2027-09-01T00:00:00Z"
+  - capability: purge_customer
+    approver: support-eng-lead
+    expires_at: "2027-09-01T00:00:00Z"
+  - capability: unresolved-tools:Router
+    approver: support-eng-lead
+    expires_at: "2027-09-01T00:00:00Z"
