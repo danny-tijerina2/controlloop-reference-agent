@@ -1,0 +1,37 @@
+schema_version: "1.2.0"
+owner: support-eng
+
+trust_boundaries:
+  - name: triage-boundary
+    agents:
+      - support-triage-agent
+
+# Nothing in an agent card says that purging history destroys data, so
+# this block is what makes the capability classifiable at all.
+tool_capabilities:
+  - tool: Read a ticket
+    read_only: true
+  - tool: Read a customer record
+    read_only: true
+    sensitivity: confidential
+  - tool: Purge ticket history
+    destructive: true
+    read_only: false
+    sensitivity: confidential
+
+logged_tools:
+  - tool: Purge ticket history
+    audit_path: logs/purge-audit.log
+  - tool: Read a customer record
+    audit_path: logs/customer-read-audit.log
+
+approvals:
+  - capability: Read a ticket
+    approver: support-eng-lead
+    expires_at: "2027-09-01T00:00:00Z"
+  - capability: Read a customer record
+    approver: support-eng-lead
+    expires_at: "2027-09-01T00:00:00Z"
+  - capability: Purge ticket history
+    approver: support-eng-lead
+    expires_at: "2027-09-01T00:00:00Z"
