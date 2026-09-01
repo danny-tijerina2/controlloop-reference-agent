@@ -1,0 +1,64 @@
+{
+  "_comment": [
+    "Committed expectations for ControlLoop issue #100 (E10.4), asserted by",
+    "the end-to-end proof in controlloop#104. Every value here was produced by",
+    "a real `controlloop scan --format json` run against this scenario, never",
+    "hand-written."
+  ],
+  "blocking_run": {
+    "manifest": "controlloop.yaml",
+    "verdict": "deployment_blocked",
+    "gate_exit_code": 1,
+    "blast_radius": {
+      "schema_version": "1.0.0",
+      "material_class": "destructive-action",
+      "agent_id": "clp:agent:sha256:2321fe51daefbeccc66dac2ae3e63aa0237216db27510216a9f61c3faf760cf9",
+      "agent_name": "widgetworks-order-support-agent",
+      "action": "invokes",
+      "target_id": "clp:tool:sha256:740e32bb7db53d1153d921cc88764d7bf8d5a9bbc0d7c9ee22ad1ff1942fc5bb",
+      "target_name": "Bulk refund orders",
+      "permitting_identity_id": null,
+      "permitting_identity_name": null,
+      "transitive": false,
+      "path": [],
+      "incomplete": false
+    },
+    "ceiling_finding": {
+      "rule_id": "policy.destructive-or-financial-action",
+      "id": "clp:finding:sha256:2dc7dda331d01f48c8eb8bbce2730c25fefbdf51ca987a2d912fbdde0adeba48",
+      "severity": "high",
+      "confidence": "unknown",
+      "message": "Agent gained new direct invokes access to 'Bulk refund orders', classified as destructive-action and financial-action.",
+      "capability_path": {
+        "schema_version": "1.0.0",
+        "agent_id": "clp:agent:sha256:2321fe51daefbeccc66dac2ae3e63aa0237216db27510216a9f61c3faf760cf9",
+        "target_id": "clp:tool:sha256:740e32bb7db53d1153d921cc88764d7bf8d5a9bbc0d7c9ee22ad1ff1942fc5bb",
+        "target_type": "tool",
+        "hops": [
+          {
+            "edge_id": "clp:edge:sha256:9cb982cc222085241f8e8c461820fc727d82ab3ddd0c241b5ffd2bd30d761e7a",
+            "edge_type": "invokes",
+            "source_id": "clp:agent:sha256:2321fe51daefbeccc66dac2ae3e63aa0237216db27510216a9f61c3faf760cf9",
+            "target_id": "clp:tool:sha256:740e32bb7db53d1153d921cc88764d7bf8d5a9bbc0d7c9ee22ad1ff1942fc5bb",
+            "evidence": [
+              {
+                "adapter": "a2a",
+                "path": "agent-card.json",
+                "line_start": null,
+                "line_end": null,
+                "parser": null,
+                "schema_id": null,
+                "document_digest": null
+              }
+            ]
+          }
+        ],
+        "confidence": "unknown"
+      }
+    },
+    "suppressed_pattern_rules": [
+      "policy.undeclared-tools"
+    ],
+    "suppression_count": 0
+  }
+}

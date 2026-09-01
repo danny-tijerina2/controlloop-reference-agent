@@ -26,6 +26,8 @@ ceilings:
 # Every tool declared privileged in tool_capabilities below needs an
 # audit path, or policy.missing-action-logging blocks the gate.
 logged_tools:
+  - tool: Bulk refund orders
+    audit_path: logs/bulk-refund-audit.log
   - tool: Issue a refund
     audit_path: logs/refund-audit.log
   - tool: Look up an order
@@ -42,6 +44,11 @@ logged_tools:
 # Names match what discovery found: an a2a skill's node name is its
 # card `name`, not its `id`.
 tool_capabilities:
+  - tool: Bulk refund orders
+    destructive: true
+    financial_action: true
+    read_only: false
+    sensitivity: confidential
   - tool: Issue a refund
     financial_action: true
     read_only: false
