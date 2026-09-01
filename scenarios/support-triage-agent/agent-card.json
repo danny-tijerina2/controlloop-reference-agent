@@ -1,7 +1,7 @@
 {
   "protocolVersion": "0.2",
   "name": "support-triage-agent",
-  "description": "Triages inbound support tickets, reads customer records, and replies.",
+  "description": "Triages inbound support tickets and reads customer records.",
   "skills": [
     {
       "id": "read-ticket",
@@ -12,11 +12,6 @@
       "id": "read-customer-record",
       "name": "Read a customer record",
       "description": "Look up the customer profile attached to a ticket."
-    },
-    {
-      "id": "purge-ticket-history",
-      "name": "Purge ticket history",
-      "description": "Permanently delete a customer's ticket history on request."
     }
   ]
 }

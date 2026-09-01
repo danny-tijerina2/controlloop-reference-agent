@@ -4,13 +4,18 @@
     {
       "Sid": "TicketsTable",
       "Effect": "Allow",
-      "Action": ["dynamodb:GetItem", "dynamodb:Query", "dynamodb:DeleteItem"],
+      "Action": [
+        "dynamodb:GetItem",
+        "dynamodb:Query"
+      ],
       "Resource": "arn:aws:dynamodb:us-east-1:333333333333:table/tickets"
     },
     {
       "Sid": "CustomerRecords",
       "Effect": "Allow",
-      "Action": ["s3:GetObject", "s3:DeleteObject"],
+      "Action": [
+        "s3:GetObject"
+      ],
       "Resource": "arn:aws:s3:::widgetworks-customer-records/*"
     }
   ]
