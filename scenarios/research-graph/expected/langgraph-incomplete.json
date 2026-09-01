@@ -1,0 +1,33 @@
+{
+  "_comment": [
+    "Committed expectations for ControlLoop issue #283 (E16.4), asserted by",
+    "the reference-scenario workflow. Produced by a real `controlloop gate`",
+    "run against this scenario, never hand-written.",
+    "",
+    "The manifest approves every tool and declares every audit path, so no",
+    "policy rule fires. The graph still cannot claim safety: the publish",
+    "step builds its tools at runtime, and an unreadable capability is",
+    "unclassified -- the worst material class there is."
+  ],
+  "warn_run": {
+    "manifest": "controlloop.yaml",
+    "verdict": "passed_with_warnings",
+    "gate_exit_code": 0,
+    "suppressed_pattern_rules": [],
+    "blast_radius": {
+      "material_class": "unclassified",
+      "target_name": "unresolved-tools:research-graph"
+    }
+  },
+  "enforce_run": {
+    "_comment": [
+      "The same scenario with completeness_enforcement = enforce, which is",
+      "what a team gating a real deployment should set. Recorded as real",
+      "output; the workflow asserts warn_run, since the Action does not set",
+      "that environment variable."
+    ],
+    "manifest": "controlloop.yaml",
+    "verdict": "review_required",
+    "gate_exit_code": 3
+  }
+}

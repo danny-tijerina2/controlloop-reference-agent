@@ -1,0 +1,55 @@
+schema_version: "1.2.0"
+owner: research-eng
+
+trust_boundaries:
+  - name: research-boundary
+    agents:
+      - research-graph
+
+# Discovery learns which nodes and tools exist. Nothing in a LangGraph
+# project states what any of them does to the world, so -- exactly as for
+# an A2A skill or a CrewAI tool -- that has to be declared here.
+tool_capabilities:
+  - tool: TavilySearchResults
+    read_only: true
+    external_communication: true
+  - tool: research
+    read_only: true
+  - tool: plan
+    read_only: true
+  - tool: write
+    read_only: false
+  - tool: publish
+    external_communication: true
+    read_only: false
+    sensitivity: confidential
+
+logged_tools:
+  - tool: TavilySearchResults
+    audit_path: logs/search-audit.log
+  - tool: publish
+    audit_path: logs/publish-audit.log
+  - tool: write
+    audit_path: logs/write-audit.log
+  - tool: unresolved-tools:research-graph
+    audit_path: logs/unresolved-audit.log
+
+approvals:
+  - capability: TavilySearchResults
+    approver: research-eng-lead
+    expires_at: "2027-09-01T00:00:00Z"
+  - capability: plan
+    approver: research-eng-lead
+    expires_at: "2027-09-01T00:00:00Z"
+  - capability: research
+    approver: research-eng-lead
+    expires_at: "2027-09-01T00:00:00Z"
+  - capability: write
+    approver: research-eng-lead
+    expires_at: "2027-09-01T00:00:00Z"
+  - capability: publish
+    approver: research-eng-lead
+    expires_at: "2027-09-01T00:00:00Z"
+  - capability: unresolved-tools:research-graph
+    approver: research-eng-lead
+    expires_at: "2027-09-01T00:00:00Z"
