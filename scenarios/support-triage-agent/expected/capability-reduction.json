@@ -1,0 +1,22 @@
+{
+  "_comment": [
+    "Committed expectations for ControlLoop issue #103 (E10.7), asserted by",
+    "the reference-scenario workflow. Every value was produced by a real",
+    "`controlloop gate` run against this branch, never hand-written.",
+    "",
+    "This scenario is the reason issue #255 had to be fixed first. Naming a",
+    "reduced capability by material class needs a MaterialChangeSummary,",
+    "which needs both graphs, which needs the merge-base path -- and that",
+    "path was unreachable from a scenario subdirectory until #255."
+  ],
+  "reduction_run": {
+    "manifest": "controlloop.yaml",
+    "verdict": "passed",
+    "gate_exit_code": 0,
+    "suppressed_pattern_rules": [],
+    "blast_radius": {
+      "material_class": "sensitive-data-access",
+      "target_name": "Read a customer record"
+    }
+  }
+}
