@@ -60,6 +60,7 @@ support related to the ControlLoop CLI itself, use
 | Directory | Demonstrates | Issue |
 | --- | --- | --- |
 | [`scenarios/order-support-agent/`](scenarios/order-support-agent/) | The base, "currently approved" reference agent every other scenario builds on. Runnable: `uv run order-support`, then see [`SCAN.md`](scenarios/order-support-agent/SCAN.md) | [controlloop#99](https://github.com/danny-tijerina2/controlloop/issues/99) (E10.3), [controlloop#268](https://github.com/danny-tijerina2/controlloop/issues/268) |
+| [`scenarios/research-crew/`](scenarios/research-crew/) | A CrewAI crew whose publishing agent builds its tool list at runtime, so ControlLoop cannot read it. Zero policy findings, and still not safe | [controlloop#276](https://github.com/danny-tijerina2/controlloop/issues/276) (E15.4) |
 
 Each scenario is its own self-contained scan root — point `controlloop`
 at a scenario's directory, not the repository root, to scan it.

@@ -1,0 +1,66 @@
+schema_version: "1.2.0"
+owner: research-eng
+
+trust_boundaries:
+  - name: research-boundary
+    agents:
+      - Senior Research Analyst
+      - Content Writer
+      - Publishing Assistant
+
+# Discovery learns that FileWriterTool exists. Nothing in a CrewAI
+# project states what it does to the world -- so, exactly as for an A2A
+# skill, that has to be declared here.
+tool_capabilities:
+  - tool: SerperDevTool
+    read_only: true
+    external_communication: true
+  - tool: ScrapeWebsiteTool
+    read_only: true
+    external_communication: true
+  - tool: FileWriterTool
+    destructive: true
+    read_only: false
+    sensitivity: confidential
+
+logged_tools:
+  - tool: SerperDevTool
+    audit_path: logs/serper-audit.log
+  - tool: ScrapeWebsiteTool
+    audit_path: logs/scrape-audit.log
+  - tool: FileWriterTool
+    audit_path: logs/file-writer-audit.log
+  - tool: unresolved-tools:publisher
+    audit_path: logs/publisher-audit.log
+
+# The researcher's `allow_delegation: true` is real authority over every
+# other agent in the crew. Declaring it here is what turns an
+# unauthorized-delegation finding into an approved posture.
+allowed_delegation:
+  - agent: Senior Research Analyst
+    targets:
+      - Content Writer
+      - Publishing Assistant
+
+# The publisher's tools cannot be read statically, so ControlLoop treats
+# the capability as unclassified -- the worst class there is. Declaring
+# an audit path for it satisfies the logging rule without pretending to
+# know what the tool does. What remains is the honest state: analysis is
+# incomplete, and a human has to look.
+
+# Every tool the crew can reach, approved by a named human. The
+# unresolved one is approved as an unknown -- which is the honest state,
+# not a claim that anyone knows what it does.
+approvals:
+  - capability: SerperDevTool
+    approver: research-eng-lead
+    expires_at: "2027-08-31T00:00:00Z"
+  - capability: ScrapeWebsiteTool
+    approver: research-eng-lead
+    expires_at: "2027-08-31T00:00:00Z"
+  - capability: FileWriterTool
+    approver: research-eng-lead
+    expires_at: "2027-08-31T00:00:00Z"
+  - capability: unresolved-tools:publisher
+    approver: research-eng-lead
+    expires_at: "2027-08-31T00:00:00Z"

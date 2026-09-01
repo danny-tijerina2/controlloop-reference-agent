@@ -1,0 +1,39 @@
+{
+  "_comment": [
+    "Committed expectations for ControlLoop issue #276 (E15.4), asserted by",
+    "the reference-scenario workflow. Every value was produced by a real",
+    "`controlloop gate` run against this scenario, never hand-written.",
+    "",
+    "The point of this scenario: the manifest approves every tool and",
+    "declares every delegation, so ZERO policy rules fire. The crew still",
+    "cannot claim safety, because one agent's tools cannot be read",
+    "statically. That unresolved capability is unclassified, which the",
+    "material taxonomy ranks worst of all, so it becomes the worst",
+    "reachable capability -- reached transitively, through delegation."
+  ],
+  "warn_run": {
+    "manifest": "controlloop.yaml",
+    "verdict": "passed_with_warnings",
+    "gate_exit_code": 0,
+    "suppressed_pattern_rules": [],
+    "blast_radius": {
+      "material_class": "unclassified",
+      "target_name": "unresolved-tools:publisher"
+    }
+  },
+  "enforce_run": {
+    "_comment": [
+      "The same scenario with completeness_enforcement = enforce, which is",
+      "what a team gating a real deployment should set. Recorded here as",
+      "real output; the workflow asserts warn_run, since the Action does",
+      "not set that environment variable."
+    ],
+    "manifest": "controlloop.yaml",
+    "verdict": "review_required",
+    "gate_exit_code": 3,
+    "blast_radius": {
+      "material_class": "unclassified",
+      "target_name": "unresolved-tools:publisher"
+    }
+  }
+}
