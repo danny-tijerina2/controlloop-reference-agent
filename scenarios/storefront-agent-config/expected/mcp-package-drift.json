@@ -1,0 +1,23 @@
+{
+  "_comment": [
+    "Committed expectations for ControlLoop issue #444 (E18.10), asserted by",
+    "the reference-scenario workflow. Every value was produced by a real",
+    "`controlloop gate` run against this branch, never hand-written.",
+    "",
+    "The catalog-docs MCP server moves from 1.4.2 to 1.5.0 under an unchanged name."
+  ],
+  "blocking_run": {
+    "verdict": "deployment_blocked",
+    "gate_exit_code": 1,
+    "rules_fired": [
+      "policy.mcp-server-identity-change"
+    ],
+    "authority_statements": [
+      "This change gives Claude Code the power to start MCP server `catalog-docs` by running `npx -y @widgetworks-example/catalog-docs-mcp@1.5.0`, whose declaration or tool list changed (`.mcp.json`, server `catalog-docs`). No approval is recorded."
+    ],
+    "blast_radius": {
+      "material_class": "code-execution",
+      "target_name": "PostToolUse command hook (Edit|Write)"
+    }
+  }
+}
