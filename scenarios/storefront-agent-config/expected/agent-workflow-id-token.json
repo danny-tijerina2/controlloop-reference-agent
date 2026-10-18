@@ -1,0 +1,26 @@
+{
+  "_comment": [
+    "Committed expectations for ControlLoop issue #444 (E18.10), asserted by",
+    "the reference-scenario workflow. Every value was produced by a real",
+    "`controlloop gate` run against this branch, never hand-written.",
+    "",
+    "The review workflow gains id-token: write and --dangerously-skip-permissions."
+  ],
+  "blocking_run": {
+    "verdict": "deployment_blocked",
+    "gate_exit_code": 1,
+    "rules_fired": [
+      "policy.overprivileged-agent-workflow"
+    ],
+    "authority_statements": [
+      "This change gives Claude Code the power to run in GitHub Actions workflow `claude-review` with write access to id-token, skipping every permission prompt (`.github/workflows/claude-review.yml`, job `review`). No approval is recorded."
+    ],
+    "blast_radius": {
+      "material_class": "code-execution",
+      "target_name": "PostToolUse command hook (Edit|Write)",
+      "contains": [
+        "also from over-privileged workflow claude-review"
+      ]
+    }
+  }
+}
