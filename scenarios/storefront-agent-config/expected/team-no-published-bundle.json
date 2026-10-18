@@ -1,0 +1,45 @@
+{
+  "_comment": [
+    "Committed expectations for ControlLoop issue #462 (E27.12), asserted by",
+    "the reference-scenario workflow. Every value was produced by a real",
+    "`controlloop gate` run against this branch, never hand-written.",
+    "",
+    "The same two servers, with no published organization bundle. Nothing is judged: both grants are `unevaluated`, there is no finding, and the evidence says so in `team.sanction_note`."
+  ],
+  "pass_run": {
+    "verdict": "passed",
+    "gate_exit_code": 0,
+    "rules_fired": [
+      "policy.mcp-server-identity-change"
+    ],
+    "finding_messages": {
+      "policy.unsanctioned-agent-component": []
+    },
+    "authority_statements": [
+      "This change gives Claude Code the power to start MCP server `catalog-search` by running `npx -y @widgetworks-example/catalog-search-mcp@2.1.0` (`.mcp.json`, server `catalog-search`). No approval is recorded.",
+      "This change gives Claude Code the power to start MCP server `web-fetch` by running `npx -y @webfetch-tools/web-fetch-mcp@0.3.1` (`.mcp.json`, server `web-fetch`). No approval is recorded."
+    ],
+    "team": {
+      "organization_bundle_version": "",
+      "policy_source": "stale_cache",
+      "entitlement_state": "unreachable",
+      "sanction_note": "unevaluated: no published organization policy bundle governs this project, so no agent-authority grant was judged against an approved list. This is not an approval.",
+      "sanction_judgments": [
+        {
+          "component_type": "mcp_server",
+          "component_name": "catalog-search",
+          "state": "unevaluated",
+          "failed_constraint": null,
+          "judged_by_policy_version": ""
+        },
+        {
+          "component_type": "mcp_server",
+          "component_name": "web-fetch",
+          "state": "unevaluated",
+          "failed_constraint": null,
+          "judged_by_policy_version": ""
+        }
+      ]
+    }
+  }
+}
