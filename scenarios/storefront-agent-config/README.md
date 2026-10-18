@@ -23,6 +23,38 @@ Each scenario branch changes one thing, the way a real pull request would:
 | `scenario/agent-workflow-id-token` | The review workflow gets `id-token: write` and `--dangerously-skip-permissions` | An agent that can mint cloud credentials and never asks |
 | `scenario/pinned-plugin-added` | A plugin from the pinned marketplace is enabled | A benign change that must not fail |
 
+## The Team scenarios: an approved-components list
+
+Three more branches run the same storefront as a **Team** repository whose
+organization keeps a list of approved agent components (controlloop#462,
+epic E27). They prove the paid gate on a real repository against a real
+policy bundle, with no platform deployed:
+
+| Branch | The change | The outcome |
+| --- | --- | --- |
+| `scenario/team-sanctioned-grant` | Adds the MCP server `catalog-search`, which the bundle approves by package, version range, and digest | Passes (exit `0`); the grant is judged `sanctioned` by bundle version `12` |
+| `scenario/team-unsanctioned-grant` | Also adds `web-fetch`, running `@webfetch-tools/web-fetch-mcp` under a name the bundle approves only for `@widgetworks-example/web-fetch-mcp` | Review required (exit `3`); one `policy.unsanctioned-agent-component` finding naming constraint `package` |
+| `scenario/team-no-published-bundle` | The same two servers, with no published bundle | Passes (exit `0`); both grants are `unevaluated`, with no finding, and the evidence says so |
+
+Each branch commits three things beside the change:
+
+- `controlloop.toml` turns Team on, with an endpoint nothing listens on
+  and `team_fail_mode = "open"`.
+- `.controlloop/team-cache/policy.json` is the organization's effective
+  policy as the gate caches it. Every D13 constraint field is in it.
+  `command_pattern` and `pin_required` cover the hook and marketplace
+  already on `main`, which a change that leaves them alone does not
+  re-judge.
+- `expected/<scenario>.json` is recorded from a real gate run, including
+  the sanction judgments and the bundle version that made them.
+
+The gate says on standard error that the platform could not be reached,
+and records `policy_source: stale_cache` and `entitlement_state:
+unreachable` in its evidence. That is how a Team gate behaves offline
+when its repository chose to fail open. It is shown here on purpose: a
+real Team repository would keep the default `closed` fail mode and a
+reachable endpoint.
+
 ## Everything here is inert
 
 - `.github/setup.js` on the hook branch does nothing and exits. It stands
