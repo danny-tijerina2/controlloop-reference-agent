@@ -2,7 +2,7 @@
   "mcpServers": {
     "catalog-docs": {
       "command": "npx",
-      "args": ["-y", "@widgetworks-example/catalog-docs-mcp@1.4.2"]
+      "args": ["-y", "@widgetworks-example/catalog-docs-mcp@1.5.0"]
     }
   }
 }
