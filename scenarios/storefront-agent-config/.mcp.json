@@ -2,7 +2,17 @@
   "mcpServers": {
     "catalog-docs": {
       "command": "npx",
-      "args": ["-y", "@widgetworks-example/catalog-docs-mcp@1.4.2"]
+      "args": [
+        "-y",
+        "@widgetworks-example/catalog-docs-mcp@1.4.2"
+      ]
+    },
+    "catalog-search": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@widgetworks-example/catalog-search-mcp@2.1.0"
+      ]
     }
   }
 }
