@@ -1,0 +1,10 @@
+{
+  "name": "widgetworks-storefront",
+  "version": "0.3.0",
+  "private": true,
+  "description": "Fictional storefront used by the ControlLoop agent-configuration scenarios.",
+  "scripts": {
+    "test": "node --test",
+    "format": "prettier --write ."
+  }
+}

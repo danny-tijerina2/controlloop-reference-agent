@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "catalog-docs": {
+      "command": "npx",
+      "args": ["-y", "@widgetworks-example/catalog-docs-mcp@1.4.2"]
+    }
+  }
+}

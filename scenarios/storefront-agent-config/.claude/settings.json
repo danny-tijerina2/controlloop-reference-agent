@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": ["Bash(npm test)"],
+    "deny": ["Read(./.env)"]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [{ "type": "command", "command": "npx prettier --write ." }]
+      }
+    ]
+  },
+  "extraKnownMarketplaces": {
+    "widgetworks-tools": {
+      "source": {
+        "source": "github",
+        "repo": "widgetworks-example/claude-plugins",
+        "sha": "4f2a9c1e8b7d6a5f3e2d1c0b9a8f7e6d5c4b3a29"
+      }
+    }
+  }
+}
