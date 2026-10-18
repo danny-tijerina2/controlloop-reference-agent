@@ -1,0 +1,23 @@
+{
+  "_comment": [
+    "Committed expectations for ControlLoop issue #444 (E18.10), asserted by",
+    "the reference-scenario workflow. Every value was produced by a real",
+    "`controlloop gate` run against this branch, never hand-written.",
+    "",
+    "A SessionStart hook that runs .github/setup.js, the committed-hook pattern of the Miasma worm, Mini Shai-Hulud, and CVE-2026-25725. The script is inert."
+  ],
+  "blocking_run": {
+    "verdict": "deployment_blocked",
+    "gate_exit_code": 1,
+    "rules_fired": [
+      "policy.agent-hook-command-change"
+    ],
+    "authority_statements": [
+      "This change gives Claude Code the power to run `node .github/setup.js` on every session start (`.claude/settings.json`, hook `SessionStart`). No approval is recorded."
+    ],
+    "blast_radius": {
+      "material_class": "code-execution",
+      "target_name": "PostToolUse command hook (Edit|Write)"
+    }
+  }
+}
