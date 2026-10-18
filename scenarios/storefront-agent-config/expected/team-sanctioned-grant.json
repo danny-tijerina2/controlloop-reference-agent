@@ -1,0 +1,37 @@
+{
+  "_comment": [
+    "Committed expectations for ControlLoop issue #462 (E27.12), asserted by",
+    "the reference-scenario workflow. Every value was produced by a real",
+    "`controlloop gate` run against this branch, never hand-written.",
+    "",
+    "Adds the MCP server `catalog-search`, which the cached organization bundle (version 12) approves by package, version range, and digest. A sanctioned grant passes."
+  ],
+  "pass_run": {
+    "verdict": "passed",
+    "gate_exit_code": 0,
+    "rules_fired": [
+      "policy.mcp-server-identity-change"
+    ],
+    "finding_messages": {
+      "policy.unsanctioned-agent-component": []
+    },
+    "authority_statements": [
+      "This change gives Claude Code the power to start MCP server `catalog-search` by running `npx -y @widgetworks-example/catalog-search-mcp@2.1.0` (`.mcp.json`, server `catalog-search`). No approval is recorded."
+    ],
+    "team": {
+      "organization_bundle_version": "12",
+      "policy_source": "stale_cache",
+      "entitlement_state": "unreachable",
+      "sanction_note": null,
+      "sanction_judgments": [
+        {
+          "component_type": "mcp_server",
+          "component_name": "catalog-search",
+          "state": "sanctioned",
+          "failed_constraint": null,
+          "judged_by_policy_version": "12"
+        }
+      ]
+    }
+  }
+}
