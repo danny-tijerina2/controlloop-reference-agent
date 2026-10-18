@@ -1,0 +1,48 @@
+{
+  "_comment": [
+    "Committed expectations for ControlLoop issue #462 (E27.12), asserted by",
+    "the reference-scenario workflow. Every value was produced by a real",
+    "`controlloop gate` run against this branch, never hand-written.",
+    "",
+    "Adds `catalog-search` (sanctioned) and `web-fetch`, which runs `@webfetch-tools/web-fetch-mcp` under a name the bundle approves only for `@widgetworks-example/web-fetch-mcp`. The unsanctioned grant fails constraint `package`, and the verdict is review required (exit 3)."
+  ],
+  "review_run": {
+    "verdict": "review_required",
+    "gate_exit_code": 3,
+    "rules_fired": [
+      "policy.mcp-server-identity-change",
+      "policy.unsanctioned-agent-component"
+    ],
+    "finding_messages": {
+      "policy.unsanctioned-agent-component": [
+        "The mcp_server `web-fetch` is not approved by organization policy version 12: its package is not the approved package (constraint `package`)."
+      ]
+    },
+    "authority_statements": [
+      "This change gives Claude Code the power to start MCP server `catalog-search` by running `npx -y @widgetworks-example/catalog-search-mcp@2.1.0` (`.mcp.json`, server `catalog-search`). No approval is recorded.",
+      "This change gives Claude Code the power to start MCP server `web-fetch` by running `npx -y @webfetch-tools/web-fetch-mcp@0.3.1` (`.mcp.json`, server `web-fetch`). No approval is recorded."
+    ],
+    "team": {
+      "organization_bundle_version": "12",
+      "policy_source": "stale_cache",
+      "entitlement_state": "unreachable",
+      "sanction_note": null,
+      "sanction_judgments": [
+        {
+          "component_type": "mcp_server",
+          "component_name": "catalog-search",
+          "state": "sanctioned",
+          "failed_constraint": null,
+          "judged_by_policy_version": "12"
+        },
+        {
+          "component_type": "mcp_server",
+          "component_name": "web-fetch",
+          "state": "unsanctioned",
+          "failed_constraint": "package",
+          "judged_by_policy_version": "12"
+        }
+      ]
+    }
+  }
+}
