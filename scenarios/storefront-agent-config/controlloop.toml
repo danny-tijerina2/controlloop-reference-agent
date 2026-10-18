@@ -1,0 +1,12 @@
+# A Team gate that runs with no platform reachable (controlloop#462).
+#
+# The endpoint is a loopback port nothing listens on, and the fail mode is
+# `open`, so the gate continues past the unreachable platform on the
+# policy bundle cached in `.controlloop/team-cache/policy.json` -- the
+# E25.3 cache, committed. A real Team repository sets its own endpoint
+# and usually keeps the default `closed` fail mode.
+team_enabled = true
+team_endpoint = "http://127.0.0.1:9"
+team_organization_id = "00000000-0000-4000-8000-00000000a001"
+team_project_id = "00000000-0000-4000-8000-00000000b001"
+team_fail_mode = "open"
