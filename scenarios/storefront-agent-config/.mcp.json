@@ -2,7 +2,24 @@
   "mcpServers": {
     "catalog-docs": {
       "command": "npx",
-      "args": ["-y", "@widgetworks-example/catalog-docs-mcp@1.4.2"]
+      "args": [
+        "-y",
+        "@widgetworks-example/catalog-docs-mcp@1.4.2"
+      ]
+    },
+    "catalog-search": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@widgetworks-example/catalog-search-mcp@2.1.0"
+      ]
+    },
+    "web-fetch": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@webfetch-tools/web-fetch-mcp@0.3.1"
+      ]
     }
   }
 }
